@@ -16,7 +16,7 @@ class ShoppingCart
         }
     }
 
-    public function removeItem($item, $quantity)
+    public function removeItem($item, $quantity=1)
     {
         if (array_key_exists($item, $this->items)) {
             $this->items[$item]['quantity'] -= $quantity;
