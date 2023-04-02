@@ -1,4 +1,4 @@
-name: PHPUnit Tests
+name: PHP Tests
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  tests:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,22 @@ jobs:
         coverage: none
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      run: composer install
 
-    - name: Run PHPUnit tests
-      run: composer test
+    - name: Run login.php tests
+      run: composer test -- --filter logintest
+
+    - name: Run shoppingcart.php tests
+      run: composer test -- --filter shoppingcart
+
+    - name: Run search.php tests
+      run: composer test -- --filter search
+
+    - name: Run handleorder.php tests
+      run: composer test -- --filter handleorder
+
+    - name: Run pay.php tests
+      run: composer test -- --filter pay
+
+    - name: Run post.php tests
+      run: composer test -- --filter post
