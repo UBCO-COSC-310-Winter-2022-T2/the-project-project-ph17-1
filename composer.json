@@ -16,7 +16,8 @@
       }
     },
     "scripts": {
-      "test": "phpunit"
+        "test": "phpunit --verbose"
     }
+    
   }
   
