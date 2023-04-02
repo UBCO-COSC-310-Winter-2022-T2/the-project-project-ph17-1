@@ -27,19 +27,19 @@ jobs:
       run: composer install
 
     - name: Run login.php tests
-      run: composer test -- --filter LoginTest
+      run: composer test -- --filter LoginTest --verbose
 
     - name: Run shoppingcart.php tests
-      run: composer test -- --filter ShoppingCartTest
+      run: composer test -- --filter ShoppingCartTest --verbose
 
     - name: Run search.php tests
-      run: composer test -- --filter SearchTest
+      run: composer test -- --filter SearchTest --verbose
 
     - name: Run handleorder.php tests
-      run: composer test -- --filter HandleOrderTest
+      run: composer test -- --filter HandleOrderTest --verbose
 
     - name: Run pay.php tests
-      run: composer test -- --filter PayTest
+      run: composer test -- --filter PayTest --verbose
 
     - name: Run post.php tests
-      run: composer test -- --filter PostTest
+      run: composer test -- --filter PostTest --verbose
