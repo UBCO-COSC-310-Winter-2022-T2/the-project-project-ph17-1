@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once 'pay.php';
+require_once(__DIR__ . '/../code/php/pay.php');
 
 class PaymentTest extends TestCase
 {

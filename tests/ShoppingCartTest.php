@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once 'shoppingcart.php';
+require_once(__DIR__ . '/../code/php/shoppingcart.php');
 
 class ShoppingCartTest extends TestCase
 {

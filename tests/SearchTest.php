@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once 'search.php';
+require_once(__DIR__ . '/../code/php/search.php');
 
 class SearchTest extends TestCase
 {

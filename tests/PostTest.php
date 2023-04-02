@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once 'post.php';
+require_once(__DIR__ . '/../code/php/post.php');
 
 class ItemPostTest extends TestCase
 {
