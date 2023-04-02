@@ -39,4 +39,4 @@ class ItemPostTest extends TestCase
         $this->assertEquals($seller_id, $item['seller_id']);
     }
 }
-ss
+
