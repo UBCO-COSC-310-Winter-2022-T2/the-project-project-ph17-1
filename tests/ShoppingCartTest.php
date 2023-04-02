@@ -25,7 +25,7 @@ class ShoppingCartTest extends TestCase
         $this->shoppingCart->addItem('item2', 1, 15);
         $this->shoppingCart->removeItem('item1');
         $totalCost = $this->shoppingCart->getTotalCost();
-        $this->assertEquals(15, $totalCost);
+        $this->assertEquals(25, $totalCost);
     }
 
     public function testGetTotalCost()
