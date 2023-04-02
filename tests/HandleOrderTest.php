@@ -1,7 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once '../code/php/handleorder.php';
+require_once(__DIR__ . '/../code/php/handleorder.php');
+
 
 class OrderHandlerTest extends TestCase
 {
