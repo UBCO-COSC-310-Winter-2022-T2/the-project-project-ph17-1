@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 require_once(__DIR__ . '/../code/php/pay.php');
 
-class PaymentTest extends TestCase
+class PayTest extends TestCase
 {
     private $payment;
 
