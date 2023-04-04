@@ -27,13 +27,13 @@ jobs:
       run: composer install
 
     - name: Run shoppingcart.php tests
-      run: phpunit --verbose ShoppingCartTest
+      run: ./vendor/bin/phpunit --verbose ShoppingCartTest
 
     - name: Run search.php tests
-      run: phpunit --verbose SearchTest
+      run: ./vendor/bin/phpunit --verbose SearchTest
 
     - name: Run handleorder.php tests
-      run: phpunit --verbose HandleOrderTest
+      run: ./vendor/bin/phpunit --verbose HandleOrderTest
 
     - name: Run pay.php tests
-      run: phpunit --verbose PayTest
+      run: ./vendor/bin/phpunit --verbose PayTest
