@@ -12,3 +12,5 @@ In this milestone 5 we have revise and improve our code and test for the functio
 
 ## Comment on the progress
 To update current progress for this milestone, we have successfully pass CI for all of our functions. There are still few parts we need revise which is the post function and search function. Post function requires mySQL which is hard to check automatically, therefore, we will need to test manually. Search function requires improve on the code. We think we are pretty close to finish, the only thing we left is the user interface, which we will be planing to finished maybe this or next week ish. 
+
+![kanban](kanban_board_2.png)
