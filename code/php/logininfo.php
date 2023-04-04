@@ -1,4 +1,31 @@
 <?php
+// File: code/php/login.php
+
+class Login
+{
+    private $users;
+
+    public function __construct()
+    {
+        // Example user data, you should replace this with a proper data source (e.g. a database)
+        $this->users = [
+            'testuser' => [
+                'password' => 'testpassword',
+            ],
+        ];
+    }
+
+    public function validateCredentials($username, $password)
+    {
+        if (array_key_exists($username, $this->users)) {
+            return $this->users[$username]['password'] === $password;
+        }
+
+        return false;
+    }
+}
+?>
+<?php
 session_start();
 include "main.php";
 $logged = FALSE;
