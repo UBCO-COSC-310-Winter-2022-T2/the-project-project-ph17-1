@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 require_once(__DIR__ . '/../code/php/handleorder.php');
 
 
-class OrderHandlerTest extends TestCase
+class HandleOrderTest extends TestCase
 {
     private $orderHandler;
 
