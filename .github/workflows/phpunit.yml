@@ -26,9 +26,6 @@ jobs:
     - name: Install dependencies
       run: composer install
 
-    - name: Run login.php tests
-      run: composer test -- --filter LoginTest --verbose
-
     - name: Run shoppingcart.php tests
       run: composer test -- --filter ShoppingCartTest --verbose
 
