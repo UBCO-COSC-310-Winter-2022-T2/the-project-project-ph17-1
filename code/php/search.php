@@ -1,3 +1,4 @@
+<?php
 class Search
 {
     private $products = [
@@ -19,3 +20,4 @@ class Search
         return $results;
     }
 }
+?>

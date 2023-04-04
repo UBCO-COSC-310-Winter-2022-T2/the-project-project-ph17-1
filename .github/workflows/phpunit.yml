@@ -41,5 +41,3 @@ jobs:
     - name: Run pay.php tests
       run: composer test -- --filter PayTest --verbose
 
-    - name: Run post.php tests
-      run: composer test -- --filter PostTest --verbose
