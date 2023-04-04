@@ -1,3 +1,4 @@
+<?php
 class OrderHandler
 {
     private $orders = [];
@@ -31,3 +32,4 @@ class OrderHandler
         }
     }
 }
+?>
