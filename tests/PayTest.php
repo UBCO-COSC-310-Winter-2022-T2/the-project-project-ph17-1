@@ -28,3 +28,10 @@ class PaymentTest extends TestCase
         $this->assertEquals($currency, $payment['currency']);
     }
 }
+?>
+
+
+
+
+
+
