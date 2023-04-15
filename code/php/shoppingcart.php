@@ -1,8 +1,17 @@
 <?php
-
+require_once 'autoload.php';
 class ShoppingCart
 {
     private $items = [];
+
+    public static function getSessionInstance()
+{
+    if (!isset($_SESSION['shoppingcart'])) {
+        $_SESSION['shoppingcart'] = new ShoppingCart();
+    }
+    return $_SESSION['shoppingcart'];
+}
+
 
     public function addItem($item, $quantity, $price)
     {
@@ -48,6 +57,15 @@ class ShoppingCart
     {
         return $this->items;
     }
-}
 
+    public function __sleep()
+    {
+        return array_keys(get_object_vars($this));
+    }
+
+    public function __wakeup()
+    {
+        // You can perform any additional logic here if needed
+    }
+}
 ?>
