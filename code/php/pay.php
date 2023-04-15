@@ -9,14 +9,13 @@ class Payment
         $this->payments = [];
     }
 
-    public function addPayment($amount, $currency)
+    public function addPayment($amount)
     {
         $paymentId = count($this->payments) + 1;
 
         $this->payments[$paymentId] = [
             'id' => $paymentId,
             'amount' => $amount,
-            'currency' => $currency,
         ];
 
         return true;

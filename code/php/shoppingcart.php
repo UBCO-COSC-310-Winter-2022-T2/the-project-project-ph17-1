@@ -3,16 +3,6 @@ require_once 'autoload.php';
 class ShoppingCart
 {
     private $items = [];
-
-    public static function getSessionInstance()
-{
-    if (!isset($_SESSION['shoppingcart'])) {
-        $_SESSION['shoppingcart'] = new ShoppingCart();
-    }
-    return $_SESSION['shoppingcart'];
-}
-
-
     public function addItem($item, $quantity, $price)
     {
         if (array_key_exists($item, $this->items)) {
@@ -58,14 +48,23 @@ class ShoppingCart
         return $this->items;
     }
 
-    public function __sleep()
-    {
-        return array_keys(get_object_vars($this));
+    public function __serialize(): array {
+        return [
+            'items' => $this->items,
+        ];
     }
 
-    public function __wakeup()
-    {
-        // You can perform any additional logic here if needed
+    public function __unserialize(array $data): void {
+        $this->items = $data['items'];
     }
+    public static function getSessionInstance()
+    {
+        if (!isset($_SESSION['shoppingcart']) || !is_string($_SESSION['shoppingcart'])) {
+            $_SESSION['shoppingcart'] = serialize(new ShoppingCart());
+        }
+        return unserialize($_SESSION['shoppingcart']);
+    }
+    
+    
 }
 ?>

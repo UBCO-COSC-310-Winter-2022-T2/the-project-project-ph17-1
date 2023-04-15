@@ -45,7 +45,7 @@ if ($error != null) {
             while ($row = mysqli_fetch_assoc($results)) {
                 if ($email == $row['email'] && $password == $row['password']) {
                     $logged = TRUE;
-                    $_SESSION['user_id'] = $row['userid'];
+                    $_SESSION['user_id'] = $row['user_id'];
                     header("Location: Knowwell.php");
                     exit();
                 }

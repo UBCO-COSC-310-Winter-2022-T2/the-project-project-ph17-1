@@ -24,8 +24,8 @@
 <body>
     <?php session_start(); ?>
     <div class="name">
-        <a href="Knowwell.php">
-        <h1>Know Well</h1>
+        <a href="#">
+        <h1>Login</h1>
     </a>
     </div>
 

@@ -30,7 +30,6 @@
               <form action="search.php" method="GET">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><img src="../images/topsearch.png"></button>
-                
               </form>
             </div>
             <?php
@@ -43,13 +42,12 @@
         echo "<a href='login.php' class='right'>Login</a>";
     }
     ?>
-              
+              <a href="cart_display.php" class="right">Cart</a>
               <a href="Post.php" class="right">Ask Question</a>
           </div>
     </header>
 </head>
 <body>
-<!-- (existing code) -->
 <div class="content">
 
         <?php include "main.php" ?>
