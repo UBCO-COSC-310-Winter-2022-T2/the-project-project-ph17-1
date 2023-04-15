@@ -12,16 +12,14 @@ if ($error != null) {
         $email = $connection->real_escape_string($_POST['email']);
         $password = $connection->real_escape_string($_POST['password']);
         $password2 = $connection->real_escape_string($_POST['password2']);
-        $address = $connection->real_escape_string($_POST['address']);
-        $phone_number = $connection->real_escape_string($_POST['phone_number']);
-        $gender = $connection->real_escape_string($_POST['gender']);
-        $school = $connection->real_escape_string($_POST['school']);
+        $role="customer";
+
         
         $userImage = file_get_contents($_FILES['image']['tmp_name']);
 
 
-        $stmt = $connection->prepare("INSERT INTO users (username, email, password, userimage, address, phone, sex, school) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssbssss", $userName, $email, $password, $userImage, $address, $phone_number, $gender, $school);
+        $stmt = $connection->prepare("INSERT INTO users (username, email, password, userimage,role) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssbs", $userName, $email, $password, $userImage, $role);
     $stmt->send_long_data(3, $userImage);
         if ($stmt->execute()) {
             header("Location: login.php");

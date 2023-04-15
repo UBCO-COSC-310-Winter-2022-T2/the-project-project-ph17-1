@@ -23,6 +23,9 @@
   
   return $row['userimage'];
 }
+require_once 'ShoppingCart.php';
+
+
 ?>
         <div class="topnav">
             <a class="active" href="Knowwell.php" id="home">Home</a>
@@ -49,6 +52,7 @@
     </header>
 </head>
 <body>
+   
     <div class='content'>
         <div class='questre'>
 

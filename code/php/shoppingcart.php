@@ -65,6 +65,8 @@ class ShoppingCart
         return unserialize($_SESSION['shoppingcart']);
     }
     
-    
+    public function reset() {
+        $this->items = [];
+    }
 }
 ?>

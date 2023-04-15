@@ -47,27 +47,51 @@
               <a href="Post.php" class="right">Ask Question</a>
           </div>
     </header>
+    <script>
+function validateForm() {
+  const shippingAddress = document.getElementsByName("shippingAddress")[0];
+  const paymentMethods = document.getElementsByName("payment_method");
+  let paymentMethodSelected = false;
+
+  for (let i = 0; i < paymentMethods.length; i++) {
+    if (paymentMethods[i].checked) {
+      paymentMethodSelected = true;
+      break;
+    }
+  }
+
+  if (shippingAddress.value.trim() === "" || !paymentMethodSelected) {
+    alert("Please fill in all fields before submitting.");
+    return false;
+  }
+
+  return true;
+}
+</script>
+
 </head>
 <body>
     <div class='content'>
         <div class='questre'>
-    <form action="payment.php" method="post">
+    <form action="placeorder.php" method="post" onsubmit="return validateForm();">
     <label>Shipping Address:</label>
         <input type='text' name='shippingAddress' placeholder='Enter Shipping Address'><br><br>
 
         <label>Payment Method:</label><br><br>
         <label>Credit Card</label>
-        <input type='radio' name='credit_card'><br><br>
-        
-        <label>Paypal</label>
-        <input type='radio' name='paypal'><br><br>
-        
-        <label>Gift Card</label>
-        <input type='radio' name='giftcard'><br><br>
+<input type='radio' name='payment_method' value='credit_card'><br><br>
 
-        <input type='submit' value="Pay">
+        
+<label>Paypal</label>
+<input type='radio' name='payment_method' value='paypal'><br><br>
+        
+<label>Gift Card</label>
+<input type='radio' name='payment_method' value='giftcard'><br><br>
+
+        <input type='submit' value="Pay" class='checkout'>
 </form>
 </div>
 </div>
+
 </body>
 </html>

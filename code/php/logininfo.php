@@ -46,8 +46,12 @@ if ($error != null) {
                 if ($email == $row['email'] && $password == $row['password']) {
                     $logged = TRUE;
                     $_SESSION['user_id'] = $row['user_id'];
+                    if($row['role']=='admin'){
+                        header("Location: admin.php");
+                        exit();
+                    }else{
                     header("Location: Knowwell.php");
-                    exit();
+                    exit();}
                 }
             }
             $_SESSION['error_message'] = "Invalid username or password.";

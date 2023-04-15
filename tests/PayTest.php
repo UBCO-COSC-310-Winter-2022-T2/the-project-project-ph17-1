@@ -16,7 +16,7 @@ class PayTest extends TestCase
     {
         $amount = 100;
         $currency = 'USD';
-        $result = $this->payment->addPayment($amount);
+        $result = $this->payment->addPayment($amount, $currency);
         $this->assertTrue($result);
 
         // Assuming that the payment ID is 1, as this is the first payment being added.
@@ -25,6 +25,7 @@ class PayTest extends TestCase
 
         $this->assertEquals($paymentId, $payment['id']);
         $this->assertEquals($amount, $payment['amount']);
+        $this->assertEquals($currency, $payment['currency']);
     }
 }
 ?>

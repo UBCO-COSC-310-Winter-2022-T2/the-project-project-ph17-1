@@ -27,7 +27,7 @@
         <div class="topnav">
             <a class="active" href="Knowwell.php" id="home">Home</a>
             <div class="search-container">
-              <form action="searchitem.php" method="GET">
+              <form action="search.php" method="GET">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><img src="../images/topsearch.png"></button>
               </form>
@@ -59,7 +59,13 @@
         }
         else
         {
-            $sql = "SELECT * FROM items;";
+          $search = isset($_GET['search']) ? $_GET['search'] : '';
+    
+          // Sanitize the search query to prevent SQL injection
+          $search = $connection->real_escape_string($search);
+      
+      // Perform the search in your database
+      $sql = "SELECT * FROM items WHERE item_name LIKE '%$search%' OR description LIKE '%$search%'";
             $results = mysqli_query($connection, $sql);
             $sql1="SELECT * FROM users";
             $results1 = mysqli_query($connection, $sql1);

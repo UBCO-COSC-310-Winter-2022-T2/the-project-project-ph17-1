@@ -46,7 +46,7 @@
 exit();
     }
     ?>
-              
+              <a href="cart_display.php" class="right">Cart</a>
               <a href="Post.php" class="right">Ask Question</a>
           </div>
     </header>
@@ -72,7 +72,12 @@ exit();
                 echo "<h3>".$row['item_name']."</h3>";
                 echo "</div>";
                 echo '<div class="qcon">';
-                
+?>            <form action="add_to_cart.php" method="POST">
+                <input type="hidden" name="item_id" value="<?php echo $row['item_id']; ?>">
+                <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
+                <input type="submit" value="Add to Cart">
+              </form>"
+              <?php
                 //user
                 $sql1 = "SELECT * FROM users WHERE user_id=?";
                 $stmt1 = mysqli_prepare($connection, $sql1);
@@ -106,22 +111,7 @@ exit();
 
       echo '</div>';
         ?>
-        <div class='rightbar'>
-    <h4>Recommended Post</h4>
-    <ul class='rightbarlist'>
-      
-        <?php
-      
-      $sql = "SELECT * FROM items LIMIT 3;";
-      $results = mysqli_query($connection, $sql);
-      while (($row = mysqli_fetch_assoc($results))) {
-          echo "<li><a href='detail.php?id=".$row['item_id']."' class='detail'>".$row['description']."</a></li>";
-      }
-      
-      mysqli_close($connection);
-      ?>
-    </ul>
-      </div>
+       
       </div>
     </div>
     </div>

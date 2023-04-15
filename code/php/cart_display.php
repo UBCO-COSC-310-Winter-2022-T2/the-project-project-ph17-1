@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/kw_main.css?v=<?php echo time(); ?>">
     <title>Knowwell</title>
+
     <header>
     <?php
     ini_set('display_errors', 1);
@@ -16,12 +17,39 @@
 
     include "main.php";
     $admin=false;
-
+    function getUserImage($connection, $user_id) {
+        $sql = "SELECT userimage FROM users WHERE user_id=?";
+      $stmt = mysqli_prepare($connection, $sql);
+      mysqli_stmt_bind_param($stmt, "i", $user_id);
+      mysqli_stmt_execute($stmt);
+      $result = mysqli_stmt_get_result($stmt);
+      $row = mysqli_fetch_assoc($result);
+      
+      return $row['userimage'];
+      
+    }
+    
     // The duplicate function declaration has been removed.
 
     
 
 ?>
+<h1>
+</h1>
+<?php
+    if (isset($_SESSION['user_id'])) {
+        $user_image = getUserImage($connection, $_SESSION['user_id']);
+        echo '<a href="Account.php" id="account">';
+        echo '<img src="data:image/png;base64,' . base64_encode($user_image) . '" class="right user" />';
+        echo '</a>';
+    } else {
+      echo "<script>
+      alert('Please login first');
+      window.location.href = 'login.php';
+    </script>";
+exit();
+    }
+    ?>
         <div class="topnav">
             <a class="active" href="Knowwell.php" id="home">Home</a>
             <div class="search-container">
@@ -31,17 +59,7 @@
                 
               </form>
             </div>
-            <?php
-    if (isset($_SESSION['user_id'])) {
-        $user_image = getUserImage($connection, $_SESSION['user_id']);
-        echo '<a href="Account.php" id="account">';
-        echo '<img src="data:image/png;base64,' . base64_encode($user_image) . '" class="right user" />';
-        echo '</a>';
-    } else {
-        echo "<a href='login.php' class='right'>Login</a>";
-    }
-    ?>
-              
+                <a href="cart_display.php" class="right">Cart</a>
               <a href="Post.php" class="right">Ask Question</a>
           </div>
     </header>
@@ -57,7 +75,6 @@
     $items = $cart->getItems();
     $totalItems = $cart->getTotalItems();
     $totalCost = $cart->getTotalCost();
-
 
     foreach ($items as $itemid => $itemDetails) {
         if($error != null)
@@ -98,7 +115,7 @@
                 echo 'Cost: $' . ($itemDetails['quantity'] * $itemDetails['price']);?>
 
 
-                <form action="add_to_cart.php" method="POST">
+                <form action="add_cart.php" method="POST">
                 <input type="hidden" name="item_id" value="<?php echo $itemid; ?>">
                 <input type="submit" value="Add 1">
               </form>
@@ -128,9 +145,25 @@
 $_SESSION['shoppingcart'] = serialize($cart);
 
     ?>
-    <form action="checkout.php" method="POST">
-    <input type='submit' value="Checkout">
-</form>
     </div>
+
+    <div class = "check-out-location">
+    <form action="checkout.php" method="POST" onsubmit="return checkCartEmpty();">
+    <input type='submit' value="Checkout" class='checkout'>
+</form>
+</div>
+<script>
+  function checkCartEmpty() {
+    var totalItems = <?php echo $totalItems; ?>;
+    if (totalItems === 0) {
+      alert("Your cart is empty. Please add items to your cart before checking out.");
+      return false;
+    }
+    return true;
+  }
+</script>
+
 </body>
+
+
 </html>

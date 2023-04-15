@@ -13,18 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     die("No form data submitted.");
 }
 
-if (isset($_POST['text'])) {
+if (isset($_POST['description'])) {
     $userId = $_SESSION['user_id'];
-    $userName = ''; // Retrieve the username from the users table
-    $questTitle =  $_POST['title']; // You can set a default value for the questtitle here
-    $questContent = $_POST['text'];
+
+    $questTitle = $_POST['title']; // You can set a default value for the questtitle here
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $description = $_POST['description'];
     $questImage = null;
     $hasImage = false;
 
     echo "Form data submitted.<br>";
 
     // Get the username from the users table
-    $sql = "SELECT username FROM users WHERE userid = ?";
+    $sql = "SELECT username FROM users WHERE user_id = ?";
     $stmt = mysqli_prepare($connection, $sql);
     if (!$stmt) {
         die("Error preparing statement: " . mysqli_error($connection));
@@ -41,27 +43,27 @@ if (isset($_POST['text'])) {
         $hasImage = true;
     }
 
-    $sql = "INSERT INTO questions (userid, username, questtitle, questcontent, questimage) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO items (item_name, user_id, price, quantity, description, item_image) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($connection, $sql);
-    
+
     if (!$stmt) {
         die("Error preparing statement: " . mysqli_error($connection));
     }
 
     $null = NULL;
-    mysqli_stmt_bind_param($stmt, "isssb", $userId, $userName, $questTitle, $questContent, $null);
-    
+    mysqli_stmt_bind_param($stmt, "sisssb", $questTitle, $userId, $price, $quantity, $description, $null);
 
-if ($hasImage) {
-    mysqli_stmt_send_long_data($stmt, 4, $questImage);
-}
 
-if (mysqli_stmt_execute($stmt)) {
-    header("Location: Knowwell.php");
-    exit();
-} else {
-    echo "Failed to post the question: " . mysqli_stmt_error($stmt);
-}
+    if ($hasImage) {
+        mysqli_stmt_send_long_data($stmt, 5, $questImage);
+    }
+
+    if (mysqli_stmt_execute($stmt)) {
+        header("Location: Knowwell.php");
+        exit();
+    } else {
+        echo "Failed to post the question: " . mysqli_stmt_error($stmt);
+    }
 
 
     mysqli_stmt_close($stmt);

@@ -41,18 +41,6 @@
         <input type="password" name="password2" required><br>
         <label>Image:</label>
         <input type="file" name="image" accept="image/*" required><br>
-        <label>Address:</label>
-        <input type="text" name="address" required></textarea><br>
-        <label>Phone Number:</label>
-        <input type="tel" name="phone_number" placeholder="123-456-7890" required><br>
-        <label>Gender:</label>
-        <select name="gender" required>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select><br>
-        <label>School:</label>
-        <input type="text" name="school" required><br>
         <button type="submit" name="submit">Register</button>
        </fieldset>
     </form>

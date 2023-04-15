@@ -17,9 +17,10 @@
             </div>
             <?php session_start();
             include "main.php";
-
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
             function getUserImage($connection, $user_id) {
-                $sql = "SELECT userimage FROM users WHERE userid=?";
+                $sql = "SELECT userimage FROM users WHERE user_id=?";
               $stmt = mysqli_prepare($connection, $sql);
               mysqli_stmt_bind_param($stmt, "i", $user_id);
               mysqli_stmt_execute($stmt);
@@ -37,6 +38,7 @@
         echo "<a href='login.php' class='right'>Login</a>";
     }
     ?>
+              <a href="cart_display.php" class="right">Cart</a>
               <a href="Post.php" class="right">Ask Question</a>
           </div>
     </header>
@@ -53,9 +55,9 @@
     } else {
         if (isset($_SESSION['user_id'])) {
             $userid = $_SESSION['user_id'];
-            $sql = "SELECT * FROM users WHERE userid='$userid';";
+            $sql = "SELECT * FROM users WHERE user_id='$userid';";
             $result = $connection->query($sql);
-            $sql1 = "SELECT * FROM questions WHERE userid='$userid';";
+            $sql1 = "SELECT * FROM items WHERE user_id='$userid';";
             $results1 = mysqli_query($connection, $sql1);
             while ($row = $result->fetch_assoc()){
                 echo '<div class="leftAcc"><figure>';
@@ -64,36 +66,27 @@
                 echo '</figure>';
                 echo '<h3>Email: </h3>';
                 echo '<p>'.$row['email'].'</p>';
-                echo '</div>';
-                echo '<div class="rightAcc">';
-                echo '<h3>Address: </h3>';
-                echo '<p>'.$row['address'].'</p><br>';
-                echo '<h3>Phone Number: </h3>';
-                echo '<p>'.$row['phone'].'</p><br>';
-                echo '<h3>Gender: </h3>';
-                echo '<p>'.$row['sex'].'</p><br>';
-                echo '<h3>School: </h3>';
-                echo '<p>'.$row['school'].'</p><br>';
-                echo '</div>';
                 echo ' <form action="logout.php" method="POST">
                 <button type="submit" class="my-button">Log Out</button>
             </form>';
+                echo '</div>';
+                
                 echo '<div class="posts">';
                 echo '<h3>Posts: </h3>';
                 while ($row1=mysqli_fetch_assoc($results1)){
-                    if($row['userid'] == $row1['userid']){
+                    if($row['user_id'] == $row1['user_id']){
                         
                         
                         echo '<div class="question">';
                         echo '<div class="title">';
-                        echo "<h3>".$row1['questtitle']."</h3>";
+                        echo "<h3>".$row1['item_name']."</h3>";
                         echo "</div>";
                         echo '<div class="qcon">';
                         echo '<div class="qcon-text">';
-                        echo "<p>".$row1['questcontent']."</p>";
+                        echo "<p>".$row1['description']."</p>";
                         echo '</div>';
-                        if($row1['questimage']!=null){
-                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $row1['questimage'] ).'"/>';
+                        if($row1['item_image']!=null){
+                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $row1['item_image'] ).'"/>';
                         }
                         echo '</div>';
                         echo '</div>';
