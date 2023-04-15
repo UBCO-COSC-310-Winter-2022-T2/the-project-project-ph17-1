@@ -1,0 +1,39 @@
+name: PHP Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mysqli
+        coverage: none
+
+    - name: Install dependencies
+      run: composer install
+
+    - name: Run shoppingcart.php tests
+      run: ./vendor/bin/phpunit --verbose tests/ShoppingCartTest.php
+
+    - name: Run search.php tests
+      run: ./vendor/bin/phpunit --verbose tests/SearchTest.php
+
+    - name: Run handleorder.php tests
+      run: ./vendor/bin/phpunit --verbose tests/HandleOrderTest.php
+
+    - name: Run pay.php tests
+      run: ./vendor/bin/phpunit --verbose tests/PayTest.php
